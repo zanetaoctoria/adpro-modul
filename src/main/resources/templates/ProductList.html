@@ -9,13 +9,13 @@
 </head>
 <body>
 <div class="container my-4">
-    <h2 class="text-center text-danger">Product List</h2>
+    <h2 class="text-center text-primary">Product List</h2>
     <div class="text-center mb-3">
-        <a th:href="@{/product/create}" class="btn btn-sm text-white" style="background-color: #f8a5c2;">Create Product</a>
+        <a th:href="@{/product/create}" class="btn btn-sm btn-primary text-white">Create Product</a>
     </div>
     <div class="table-responsive">
-        <table class="table table-striped table-bordered" style="background-color: #fff;">
-            <thead style="background-color: #fcd5ce; color: #d26a98;">
+        <table class="table table-striped table-bordered">
+            <thead class="bg-light text-dark">
             <tr>
                 <th scope="col">Product Name</th>
                 <th scope="col">Quantity</th>
@@ -30,7 +30,11 @@
                     <div class="d-inline-block">
                         <!-- Edit button -->
                         <form th:action="@{'/product/edit/' + ${product.productId}}" method="get" class="d-inline">
-                            <button type="submit" class="btn btn-sm text-white" style="background-color: #ff6b81;">Edit</button>
+                            <button type="submit" class="btn btn-sm btn-warning text-white">Edit</button>
+                        </form>
+                        <!-- Form for deleting a product -->
+                        <form th:action="@{'/product/delete/' + ${product.productId}}" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-danger text-white">Delete</button>
                         </form>
                         <!-- Form for deleting a product -->
                         <form th:action="@{'/product/delete/' + ${product.productId}}" method="post" class="d-inline">
