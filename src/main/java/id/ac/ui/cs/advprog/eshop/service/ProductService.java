@@ -11,4 +11,6 @@ public interface ProductService {
     Product findById(String productId);
     boolean update(Product product);
 
+    // Existing delete method
+    boolean delete(String productId);
 }

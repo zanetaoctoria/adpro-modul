@@ -45,4 +45,17 @@ public class ProductRepository {
         return false;
     }
 
+    // Delete a product by its productId.
+    // Returns true if the product was found and removed; otherwise false.
+    public boolean delete(String productId) {
+        Iterator<Product> iterator = productData.iterator();
+        while (iterator.hasNext()) {
+            Product product = iterator.next();
+            if (product.getProductId() != null && product.getProductId().equals(productId)) {
+                iterator.remove();
+                return true;
+            }
+        }
+        return false;
+    }
 }
