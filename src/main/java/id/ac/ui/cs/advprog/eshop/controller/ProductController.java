@@ -20,11 +20,11 @@ public class ProductController {
     public String createProductPage(Model model) {
         Product product = new Product();
         model.addAttribute("product", product);
-        return "CreateProduct";
+        return "createProduct";  // Name of the template for creating a product.
     }
 
     @PostMapping("/create")
-    public String createProductPost(@ModelAttribute Product product, Model model){
+    public String createProductPost(@ModelAttribute Product product, Model model) {
         service.create(product);
         return "redirect:list";
     }
@@ -33,6 +33,25 @@ public class ProductController {
     public String productListPage(Model model) {
         List<Product> allProducts = service.findAll();
         model.addAttribute("products", allProducts);
-        return "ProductList";
+        return "productList";  // Name of the template for listing products.
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editProductPage(@PathVariable("id") String productId, Model model) {
+        Product product = service.findById(productId);
+        if (product == null) {
+            // In production, add proper error handling or flash message.
+            return "redirect:/product/list";
+        }
+        model.addAttribute("product", product);
+        return "editProduct";  // Name of the template for editing a product.
+    }
+
+    // POST endpoint to process the edited product details
+    @PostMapping("/edit")
+    public String editProductPost(@ModelAttribute Product product, Model model) {
+        boolean updated = service.update(product);
+        // Optionally, add flash attributes to inform the user about success/failure.
+        return "redirect:/product/list";
     }
 }
