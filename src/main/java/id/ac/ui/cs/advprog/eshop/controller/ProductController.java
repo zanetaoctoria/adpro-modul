@@ -54,4 +54,11 @@ public class ProductController {
         // Optionally, add flash attributes to inform the user about success/failure.
         return "redirect:/product/list";
     }
+
+    // Existing delete endpoint (for reference)
+    @PostMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable("id") String productId, Model model) {
+        service.delete(productId);
+        return "redirect:/product/list";
+    }
 }

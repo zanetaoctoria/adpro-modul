@@ -32,6 +32,10 @@
                         <form th:action="@{'/product/edit/' + ${product.productId}}" method="get" class="d-inline">
                             <button type="submit" class="btn btn-sm text-white" style="background-color: #ff6b81;">Edit</button>
                         </form>
+                        <!-- Form for deleting a product -->
+                        <form th:action="@{'/product/delete/' + ${product.productId}}" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-sm text-white" style="background-color: #ff6b81;">Delete</button>
+                        </form>
                     </div>
                 </td>
             </tr>
