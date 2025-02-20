@@ -1,9 +1,3 @@
-val seleniumJavaVersion = "4.14.1"
-val seleniumJupiterVersion = "5.0.1"
-val webdrivermanagerVersion = "5.6.3"
-val junitJupiterVersion = "5.9.1"
-
-
 plugins {
     java
     id("org.springframework.boot") version "3.4.2"
@@ -29,6 +23,12 @@ repositories {
     mavenCentral()
 }
 
+
+val seleniumJavaVersion = "4.14.1"
+val seleniumJupiterVersion = "5.0.1"
+val webdrivermanagerVersion = "5.6.3"
+val junitJupiterVersion = "5.9.1"
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -41,13 +41,11 @@ dependencies {
     testImplementation("org.seleniumhq.selenium:selenium-java:$seleniumJavaVersion")
     testImplementation("io.github.bonigarcia:selenium-jupiter:$seleniumJupiterVersion")
     testImplementation("io.github.bonigarcia:webdrivermanager:$webdrivermanagerVersion")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
-
+    testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
 }
 
-tasks.register<Test>(name = "unitTest") {
-    description = "Runs unit tests."
+tasks.register<Test>("unitTest") {
+    description = "Run unit tests"
     group = "verification"
 
     filter {
@@ -55,15 +53,14 @@ tasks.register<Test>(name = "unitTest") {
     }
 }
 
-tasks.register<Test>(name = "functionalTest") {
-    description = "Runs functional tests."
+tasks.register<Test>("functionalTest") {
+    description = "Run functional tests"
     group = "verification"
 
     filter {
         includeTestsMatching("*FunctionalTest")
     }
 }
-
 
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
