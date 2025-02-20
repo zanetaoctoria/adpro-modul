@@ -199,32 +199,32 @@ class ProductRepositoryTest {
     }
 
     @Test
-    void testEditSuccess() {
+    void testEditIfSuccess() {
         Product product = new Product();
         product.setProductId("123e4567-e89b-12d3-a456-556642440000");
-        product.setProductName("Dummy Product");
+        product.setProductName("Fake Product");
         product.setProductQuantity(100);
         productRepository.create(product);
 
-        product.setProductName("Dummy Yeah");
+        product.setProductName("Fake Yeah");
         product.setProductQuantity(200);
         boolean editedProduct = productRepository.update(product);
 
         assertTrue(editedProduct);
-        assertEquals("Dummy Yeah", product.getProductName());
+        assertEquals("Fake Yeah", product.getProductName());
         assertEquals(200, product.getProductQuantity());
 
         Product edited = productRepository.findById("123e4567-e89b-12d3-a456-556642440000");
-        assertEquals("Dummy Yeah", edited.getProductName());
+        assertEquals("Fake Yeah", edited.getProductName());
         assertEquals(200, edited.getProductQuantity());
         assertEquals(product.getProductId(), edited.getProductId());
     }
 
     @Test
-    void testEditNonExistent() {
+    void testEditIfNonExistent() {
         Product product = new Product();
         product.setProductId("123e4567-e89b-12d3-a456-556642440000");
-        product.setProductName("Dummy Product");
+        product.setProductName("Fake Product");
         product.setProductQuantity(100);
 
         boolean result = productRepository.update(product);
@@ -234,7 +234,7 @@ class ProductRepositoryTest {
     }
 
     @Test
-    void testDeleteSuccess() {
+    void testDeleteIfSuccess() {
         Product product = new Product();
         product.setProductId("123e4567-e89b-12d3-a456-556642440000");
         product.setProductName("Dummy");
@@ -250,10 +250,10 @@ class ProductRepositoryTest {
     }
 
     @Test
-    void testDeleteNonExistent() {
+    void testDeleteIfNonExistent() {
         Product p = new Product();
         p.setProductId("123e4567-e89b-12d3-a456-556642440000");
-        p.setProductName("Dummy Product");
+        p.setProductName("Fake Product");
         p.setProductQuantity(100);
 
         productRepository.delete("123e4567-e89b-12d3-a456-556642440000");
