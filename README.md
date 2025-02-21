@@ -1,6 +1,6 @@
 # E-Shop
 
-## Modul 1 : Prinsip Clean Code
+## Modul 1
 
 ### 1. Separation of Concerns
 Kode terbagi dengan jelas ke dalam tiga lapisan utama:
@@ -45,8 +45,6 @@ Ya, saya yakin setup CI/CD saya saat ini sudah memenuhi definisi Continuous Inte
 1. **Continuous Integration:** Setiap push atau pull request secara otomatis memicu pengujian dan pemindaian kode. Hal ini memungkinkan deteksi dini masalah integrasi dan menjaga stabilitas kode.
 2. **Continuous Deployment:** Setelah pengujian berhasil, pipeline secara otomatis menerapkan pembaruan aplikasi ke Koyeb tanpa intervensi manual, mencerminkan prinsip Continuous Deployment.
 3. **End-to-End Automation:** Proses ini berjalan secara otomatis dari commit kode, pengujian, hingga deployment ke produksi. Dengan demikian, aplikasi tetap teruji, terpelihara, dan dikirimkan dengan andal.
-
-Dengan pendekatan ini, saya dapat memastikan keamanan, stabilitas, dan efisiensi dalam pengembangan dan penerapan aplikasi saya.
 
 
 
