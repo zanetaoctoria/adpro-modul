@@ -1,15 +1,17 @@
 package id.ac.ui.cs.advprog.eshop.controller;
 
 import id.ac.ui.cs.advprog.eshop.model.Car;
-import id.ac.ui.cs.advprog.eshop.model.Product;
 import id.ac.ui.cs.advprog.eshop.service.CarServiceImpl;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import id.ac.ui.cs.advprog.eshop.model.Product;
 import id.ac.ui.cs.advprog.eshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,47 +21,51 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    private ProductService productService;
+    private ProductService service;
 
     @GetMapping("/create")
     public String createProductPage(Model model) {
         Product product = new Product();
         model.addAttribute("product", product);
-        return "CreateProduct";
+        return "createProduct";  // Name of the template for creating a product.
     }
 
     @PostMapping("/create")
-    public String createProductPost(@ModelAttribute Product product) {
-        productService.create(product);
+    public String createProductPost(@ModelAttribute Product product, Model model) {
+        service.create(product);
         return "redirect:list";
     }
 
     @GetMapping("/list")
     public String productListPage(Model model) {
-        List<Product> allProducts = productService.findAll();
+        List<Product> allProducts = service.findAll();
         model.addAttribute("products", allProducts);
-        return "ListProduct";
+        return "productList";  // Name of the template for listing products.
     }
-    @GetMapping("/update/{id}")
-    public String updateProduct(@PathVariable("id") String id, Model model) {
-        Product product = productService.findById(id);
+
+    @GetMapping("/edit/{id}")
+    public String editProductPage(@PathVariable("id") String productId, Model model) {
+        Product product = service.findById(productId);
         if (product == null) {
+            // In production, add proper error handling or flash message.
             return "redirect:/product/list";
         }
         model.addAttribute("product", product);
-        return "EditProduct";
+        return "editProduct";  // Name of the template for editing a product.
     }
 
-    @PostMapping("/update/{id}")
-    public String updateProduct(@PathVariable("id") String id, @ModelAttribute Product product, Model model) {
-        product.setProductId(id);
-        productService.update(product);
+    // POST endpoint to process the edited product details
+    @PostMapping("/edit")
+    public String editProductPost(@ModelAttribute Product product, Model model) {
+        boolean updated = service.update(product);
+        // Optionally, add flash attributes to inform the user about success/failure.
         return "redirect:/product/list";
     }
 
+    // Existing delete endpoint (for reference)
     @PostMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable String id) {
-        productService.delete(id);
+    public String deleteProduct(@PathVariable("id") String productId, Model model) {
+        service.delete(productId);
         return "redirect:/product/list";
     }
 }
@@ -67,6 +73,7 @@ public class ProductController {
 @Controller
 @RequestMapping("/car")
 class CarController extends ProductController {
+
     @Autowired
     private CarServiceImpl carservice;
 
@@ -78,17 +85,18 @@ class CarController extends ProductController {
     }
 
     @PostMapping("/createCar")
-    public String createCarPost(@ModelAttribute Car car, Model model){
+    public String createCarPost(@ModelAttribute Car car, Model model) {
         carservice.create(car);
         return "redirect:listCar";
     }
 
     @GetMapping("/listCar")
-    public String carListPage(Model model){
+    public String carListPage(Model model) {
         List<Car> allCars = carservice.findAll();
         model.addAttribute("cars", allCars);
         return "carList";
     }
+
     @GetMapping("/editCar/{carId}")
     public String editCarPage(@PathVariable String carId, Model model) {
         Car car = carservice.findById(carId);
