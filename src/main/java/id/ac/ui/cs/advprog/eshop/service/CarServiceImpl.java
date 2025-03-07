@@ -1,4 +1,3 @@
-
 package id.ac.ui.cs.advprog.eshop.service;
 
 import id.ac.ui.cs.advprog.eshop.model.Car;
@@ -18,7 +17,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public Car create(Car car) {
         // TODO Auto-generated method stub
-        carRepository.create(car);
+        carRepository.createCar(car);
         return car;
     }
 
