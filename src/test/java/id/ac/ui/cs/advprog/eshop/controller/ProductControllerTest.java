@@ -1,7 +1,12 @@
 package id.ac.ui.cs.advprog.eshop.controller;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
+import id.ac.ui.cs.advprog.eshop.repository.CarRepository;
+import id.ac.ui.cs.advprog.eshop.repository.ProductRepository;
+import id.ac.ui.cs.advprog.eshop.service.CarService;
+import id.ac.ui.cs.advprog.eshop.service.CarServiceImpl;
 import id.ac.ui.cs.advprog.eshop.service.ProductService;
+import id.ac.ui.cs.advprog.eshop.service.ProductServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
@@ -20,7 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(ProductController.class)
+@WebMvcTest(controllers = ProductController.class)
 @Import(ProductControllerTest.TestConfig.class)
 class ProductControllerTest {
 
@@ -34,8 +39,23 @@ class ProductControllerTest {
     // Test configuration to create and register a mock for ProductService
     static class TestConfig {
         @Bean
+        public ProductRepository productRepository() {
+            return Mockito.mock(ProductRepository.class);
+        }
+
+        @Bean
         public ProductService productService() {
-            return Mockito.mock(ProductService.class);
+            return Mockito.mock(ProductServiceImpl.class);
+        }
+
+        @Bean
+        public CarRepository carRepository() {
+            return Mockito.mock(CarRepository.class);
+        }
+
+        @Bean
+        public CarServiceImpl carService() {
+            return Mockito.mock(CarServiceImpl.class);
         }
     }
 
@@ -44,7 +64,7 @@ class ProductControllerTest {
     void testCreateProductPage() throws Exception {
         mockMvc.perform(get("/product/create"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("createProduct"))
+                .andExpect(view().name("CreateProduct"))
                 .andExpect(model().attributeExists("product"));
     }
 
@@ -86,7 +106,7 @@ class ProductControllerTest {
 
         mockMvc.perform(get("/product/list"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("productList"))
+                .andExpect(view().name("ProductList"))
                 .andExpect(model().attribute("products", products));
     }
 
@@ -104,7 +124,7 @@ class ProductControllerTest {
 
         mockMvc.perform(get("/product/edit/123e4567-e89b-12d3-a456-556642440000"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("editProduct"))
+                .andExpect(view().name("EditProduct"))
                 .andExpect(model().attribute("product", product));
     }
 
