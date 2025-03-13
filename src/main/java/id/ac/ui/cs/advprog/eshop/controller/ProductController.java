@@ -1,5 +1,9 @@
 package id.ac.ui.cs.advprog.eshop.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import id.ac.ui.cs.advprog.eshop.model.Product;
 import id.ac.ui.cs.advprog.eshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +24,7 @@ public class ProductController {
     public String createProductPage(Model model) {
         Product product = new Product();
         model.addAttribute("product", product);
-        return "createProduct";  // Name of the template for creating a product.
+        return "CreateProduct";  // Name of the template for creating a product.
     }
 
     @PostMapping("/create")
@@ -33,7 +37,7 @@ public class ProductController {
     public String productListPage(Model model) {
         List<Product> allProducts = service.findAll();
         model.addAttribute("products", allProducts);
-        return "productList";  // Name of the template for listing products.
+        return "ProductList";  // Name of the template for listing products.
     }
 
     @GetMapping("/edit/{id}")
@@ -44,7 +48,7 @@ public class ProductController {
             return "redirect:/product/list";
         }
         model.addAttribute("product", product);
-        return "editProduct";  // Name of the template for editing a product.
+        return "EditProduct";  // Name of the template for editing a product.
     }
 
     // POST endpoint to process the edited product details
