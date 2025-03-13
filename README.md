@@ -46,6 +46,50 @@ Ya, saya yakin setup CI/CD saya saat ini sudah memenuhi definisi Continuous Inte
 2. **Continuous Deployment:** Setelah pengujian berhasil, pipeline secara otomatis menerapkan pembaruan aplikasi ke Koyeb tanpa intervensi manual, mencerminkan prinsip Continuous Deployment.
 3. **End-to-End Automation:** Proses ini berjalan secara otomatis dari commit kode, pengujian, hingga deployment ke produksi. Dengan demikian, aplikasi tetap teruji, terpelihara, dan dikirimkan dengan andal.
 
+## MODUL 3 
+
+### **Prinsip SOLID yang Diterapkan dalam Proyek**
+Dalam proyek ini, saya menerapkan prinsip SOLID untuk meningkatkan kualitas kode dan membuatnya lebih modular serta mudah dipelihara. Berikut adalah prinsip-prinsip yang diterapkan:
+
+1. **Single Responsibility Principle (SRP)**: Setiap kelas memiliki satu tanggung jawab utama.
+    - Contoh: Model seperti `Product` dan `Car` hanya berfungsi untuk merepresentasikan data, sedangkan `ProductService` dan `CarService` hanya menangani logika bisnis.
+
+2. **Open/Closed Principle (OCP)**: Kode dapat diperluas tanpa harus mengubah kode yang sudah ada.
+    - Contoh: Penggunaan kelas abstrak seperti `Item` memungkinkan pembuatan subclass seperti `Car` dan `Product` tanpa harus mengubah `Item`.
+
+3. **Liskov Substitution Principle (LSP)**: Subclass dapat menggantikan superclass tanpa mengubah perilaku sistem.
+    - Contoh: Kelas `Car` dan `Product` mewarisi `Item`, sehingga bisa digunakan di seluruh sistem tanpa mengganggu fungsionalitas yang sudah ada.
+
+4. **Interface Segregation Principle (ISP)**: Setiap class hanya bergantung pada metode yang diperlukan.
+    - Contoh: `ProductController` hanya bergantung pada metode yang dibutuhkan tanpa harus menggunakan keseluruhan fungsi dalam satu interface besar.
+
+5. **Dependency Inversion Principle (DIP)**: Setiap layer bergantung pada abstraksi, bukan pada implementasi langsung.
+    - Contoh: Spring menggunakan Inversion of Control (IoC) dan Dependency Injection sehingga `Service` tidak langsung bergantung pada `Repository`, melainkan melalui interface seperti `ProductRepository` dan `ItemService`.
+
+## **Keuntungan Penerapan SOLID Principles**
+1. **Meningkatkan Maintainability**:
+    - Kode lebih mudah dipahami, diperbaiki, dan diperluas.
+    - Contoh: `ProductService` hanya bertanggung jawab atas logika bisnis, sementara `ProductController` hanya menangani HTTP request.
+
+2. **Meningkatkan Fleksibilitas dan Skalabilitas**:
+    - Kelas dapat diperluas tanpa mengubah kode yang sudah ada.
+    - Contoh: Untuk menambahkan jenis produk baru, cukup membuat subclass dari `Item`, tanpa harus mengubah kode inti.
+
+3. **Meningkatkan Reusability**:
+    - Subclass dapat menggantikan superclass tanpa mempengaruhi fungsi sistem.
+    - Contoh: `Car` dan `Product` dapat digunakan di mana pun `Item` diperlukan, tanpa menyebabkan error atau perubahan pada implementasi lain.
+
+## **Dampak Buruk Jika SOLID Tidak Diterapkan**
+
+1. **Kompleksitas Kode yang Tinggi**: Tanpa SRP, kelas bisa memiliki banyak tanggung jawab, membuat kode sulit dipahami dan diperbaiki.
+    - Contoh: Jika `ProductService` menangani baik logika bisnis maupun penyimpanan data, perubahan kecil dapat menyebabkan banyak error.
+
+2. **Tight Coupling**: Tanpa OCP, kode menjadi sulit dikembangkan dan diperbaiki karena setiap perubahan memengaruhi banyak bagian lainnya.
+    - Contoh: Jika `ProductRepository` langsung bergantung pada `ProductService`, perubahan kecil dapat merusak berbagai fungsi yang menggunakan repository tersebut.
+
+## **Kesimpulan**
+Penerapan prinsip SOLID sangat penting untuk menciptakan sistem yang **scalable, mudah diuji, dan mudah dipelihara**. Dengan menerapkan prinsip ini, kita dapat meningkatkan fleksibilitas dalam menambahkan fitur baru tanpa mengubah kode yang ada, mengurangi kompleksitas, serta mencegah ketergantungan yang berlebihan antar kelas. Oleh karena itu, mengikuti SOLID principles sangat direkomendasikan dalam pengembangan perangkat lunak, terutama untuk sistem yang berkembang dan membutuhkan arsitektur yang kuat.
+
 
 
 
