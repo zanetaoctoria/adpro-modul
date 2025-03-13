@@ -40,6 +40,7 @@ public class CarRepository {
                 car.setCarId(updatedCar.getCarId());
                 car.setCarName(updatedCar.getCarName());
                 car.setCarQuantity(updatedCar.getCarQuantity());
+                car.setCarColor(updatedCar.getCarColor());
                 return car;
             }
         }
