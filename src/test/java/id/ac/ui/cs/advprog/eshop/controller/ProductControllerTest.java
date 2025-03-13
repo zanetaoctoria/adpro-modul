@@ -1,7 +1,12 @@
 package id.ac.ui.cs.advprog.eshop.controller;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
+import id.ac.ui.cs.advprog.eshop.repository.CarRepository;
+import id.ac.ui.cs.advprog.eshop.repository.ProductRepository;
+import id.ac.ui.cs.advprog.eshop.service.CarService;
+import id.ac.ui.cs.advprog.eshop.service.CarServiceImpl;
 import id.ac.ui.cs.advprog.eshop.service.ProductService;
+import id.ac.ui.cs.advprog.eshop.service.ProductServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
@@ -20,7 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(ProductController.class)
+@WebMvcTest(controllers = ProductController.class)
 @Import(ProductControllerTest.TestConfig.class)
 class ProductControllerTest {
 
@@ -34,8 +39,23 @@ class ProductControllerTest {
     // Test configuration to create and register a mock for ProductService
     static class TestConfig {
         @Bean
+        public ProductRepository productRepository() {
+            return Mockito.mock(ProductRepository.class);
+        }
+
+        @Bean
         public ProductService productService() {
-            return Mockito.mock(ProductService.class);
+            return Mockito.mock(ProductServiceImpl.class);
+        }
+
+        @Bean
+        public CarRepository carRepository() {
+            return Mockito.mock(CarRepository.class);
+        }
+
+        @Bean
+        public CarServiceImpl carService() {
+            return Mockito.mock(CarServiceImpl.class);
         }
     }
 
