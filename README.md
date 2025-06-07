@@ -66,7 +66,7 @@ Dalam proyek ini, saya menerapkan prinsip SOLID untuk meningkatkan kualitas kode
 5. **Dependency Inversion Principle (DIP)**: Setiap layer bergantung pada abstraksi, bukan pada implementasi langsung.
     - Contoh: Spring menggunakan Inversion of Control (IoC) dan Dependency Injection sehingga `Service` tidak langsung bergantung pada `Repository`, melainkan melalui interface seperti `ProductRepository` dan `ItemService`.
 
-## **Keuntungan Penerapan SOLID Principles**
+### **Keuntungan Penerapan SOLID Principles**
 1. **Meningkatkan Maintainability**:
     - Kode lebih mudah dipahami, diperbaiki, dan diperluas.
     - Contoh: `ProductService` hanya bertanggung jawab atas logika bisnis, sementara `ProductController` hanya menangani HTTP request.
@@ -79,7 +79,7 @@ Dalam proyek ini, saya menerapkan prinsip SOLID untuk meningkatkan kualitas kode
     - Subclass dapat menggantikan superclass tanpa mempengaruhi fungsi sistem.
     - Contoh: `Car` dan `Product` dapat digunakan di mana pun `Item` diperlukan, tanpa menyebabkan error atau perubahan pada implementasi lain.
 
-## **Dampak Buruk Jika SOLID Tidak Diterapkan**
+### **Dampak Buruk Jika SOLID Tidak Diterapkan**
 
 1. **Kompleksitas Kode yang Tinggi**: Tanpa SRP, kelas bisa memiliki banyak tanggung jawab, membuat kode sulit dipahami dan diperbaiki.
     - Contoh: Jika `ProductService` menangani baik logika bisnis maupun penyimpanan data, perubahan kecil dapat menyebabkan banyak error.
@@ -87,8 +87,26 @@ Dalam proyek ini, saya menerapkan prinsip SOLID untuk meningkatkan kualitas kode
 2. **Tight Coupling**: Tanpa OCP, kode menjadi sulit dikembangkan dan diperbaiki karena setiap perubahan memengaruhi banyak bagian lainnya.
     - Contoh: Jika `ProductRepository` langsung bergantung pada `ProductService`, perubahan kecil dapat merusak berbagai fungsi yang menggunakan repository tersebut.
 
-## **Kesimpulan**
+### **Kesimpulan**
 Penerapan prinsip SOLID sangat penting untuk menciptakan sistem yang **scalable, mudah diuji, dan mudah dipelihara**. Dengan menerapkan prinsip ini, kita dapat meningkatkan fleksibilitas dalam menambahkan fitur baru tanpa mengubah kode yang ada, mengurangi kompleksitas, serta mencegah ketergantungan yang berlebihan antar kelas. Oleh karena itu, mengikuti SOLID principles sangat direkomendasikan dalam pengembangan perangkat lunak, terutama untuk sistem yang berkembang dan membutuhkan arsitektur yang kuat.
+
+
+## MODUL 4
+# Reflection 4
+
+### Reflect based on Percival (2017) proposed self-reflective questions (in “Principles and Best Practice of Testing” submodule, chapter “Evaluating Your Testing Objectives”), whether this TDD flow is useful enough for you or not. If not, explain things that you need to do next time you make more tests.
+
+After completing module 4 and applying the Test-Driven Development (TDD) workflow, I felt quite exhausted because I had to follow many steps and processes. Nevertheless, I still find the TDD workflow useful to ensure that every part of the system is tested. This workflow does require more time at the beginning, considering we have to write the tests first before creating the system's code and implementation. At first, I was even confused about what tests I should implement. However, after going through the entire process, I realized that this approach helped me identify potential bugs more easily and allowed me to fix them immediately. As a result, I won’t have to deal with troublesome and major bug fixing in the future when the system is already deployed.
+
+### You have created unit tests in Tutorial. Now reflect whether your tests have successfully followed the F.I.R.S.T. principle or not. If not, explain things that you need to do the next time you create more tests.
+
+The tests I wrote in this module have mostly followed the F.I.R.S.T. principles well:
+
+* *Fast*: The tests ran quickly because they were simple tests with not-so-complex algorithms.
+* *Isolated*: Each test ran independently without being affected by or affecting other tests.
+* *Repeatable*: The tests consistently produced the same results every time they were run.
+* *Self-validating*: The tests used `assertions`, so they could directly determine whether the results met expectations without manual inspection.
+* *Thorough*: Although the tests I created already covered most parts of the system, I feel there are still some minor parts that haven't been tested. Therefore, in the future, I will strive to create more comprehensive tests to cover all parts of the system and prevent bugs later on.
 
 
 
